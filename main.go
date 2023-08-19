@@ -3,32 +3,21 @@ package main
 import (
 	"fmt"
 	"go-cli-p/cmd"
-	"go-cli-p/cmd/ping"
+	"go-cli-p/logger"
 	"os"
 	"os/signal"
 	"syscall"
 )
 
 func main() {
-	addHooks()
+	// addHooks()
 	handleSIGINT()
 
 	cmd.Execute()
-
-	showStatistics()
 }
 
-func showStatistics() {
-
-	fmt.Print("\n--------- Statistics ---------\n")
-
-	success := ping.Success.Load()
-	failure := ping.Failed.Load()
-
-	total := success + failure
-	successPercentage := 100 * float64(success) / float64(total)
-
-	fmt.Printf("total hits: %v, success percentage %f\n", total, successPercentage)
+func cleanup() {
+	fmt.Println("Program killed. Cleaning.")
 }
 
 func handleSIGINT() {
@@ -37,8 +26,8 @@ func handleSIGINT() {
 
 	go func() {
 		<-c
-		showStatistics()
-		fmt.Println()
+		cleanup()
+		logger.Println()
 		os.Exit(1)
 	}()
 }

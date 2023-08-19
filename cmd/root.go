@@ -1,8 +1,9 @@
 package cmd
 
 import (
-	"fmt"
 	"go-cli-p/cmd/network"
+	"go-cli-p/cmd/utils"
+	"go-cli-p/logger"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -20,11 +21,12 @@ var rootCmd = &cobra.Command{
 func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {
-		fmt.Println(err)
+		logger.Println(err)
 		os.Exit(1)
 	}
 }
 
 func init() {
 	rootCmd.AddCommand(network.NetworkCmd)
+	rootCmd.AddCommand(utils.UtilsCmd)
 }
