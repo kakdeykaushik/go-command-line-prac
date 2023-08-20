@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"go-cli-p/cmd/network"
+	"go-cli-p/cmd/todo"
 	"go-cli-p/cmd/utils"
 	"go-cli-p/logger"
 	"os"
@@ -29,4 +30,5 @@ func Execute() {
 func init() {
 	rootCmd.AddCommand(network.NetworkCmd)
 	rootCmd.AddCommand(utils.UtilsCmd)
+	rootCmd.AddCommand(todo.TodoCmd)
 }

@@ -4,6 +4,7 @@ go 1.20
 
 require (
 	github.com/brahma-adshonor/gohook v1.1.9
+	github.com/google/uuid v1.3.0
 	github.com/spf13/cobra v1.7.0
 )
 
