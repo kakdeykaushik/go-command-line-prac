@@ -80,7 +80,7 @@ var TodoCmd = &cobra.Command{
 				logger.Println("Todo does not exists")
 				return
 			}
-			theTodo.GetDetails()
+			logger.Println(theTodo.GetDetails())
 		}
 
 		// logger.Println(store.ViewAll())

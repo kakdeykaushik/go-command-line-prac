@@ -43,14 +43,21 @@ func (t *Todo) UpdateTitle(newTitle string) {
 	t.Save()
 }
 
-func (t *Todo) GetDetails() string {
-	status := "Incomplete"
-	if t.Complete {
-		status = "Complete"
-	}
+// DRY - for future Kaushik
+func (t Todo) GetDetails() string {
+	status := getStatus(t.Complete)
 	return fmt.Sprintf("Id: %s, Title: %s, Status: %s", t.Id, t.Title, status)
 }
 
 func (t Todo) String() string {
-	return fmt.Sprintf("Id: %s Title: %s Complete: %v", t.Id, t.Title, t.Complete)
+	status := getStatus(t.Complete)
+	return fmt.Sprintf("Id: %s, Title: %s, Status: %s", t.Id, t.Title, status)
+}
+
+func getStatus(complete bool) string {
+	status := "Incomplete"
+	if complete {
+		status = "Complete"
+	}
+	return status
 }
