@@ -7,12 +7,15 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+
+	"go-cli-p/database"
 )
 
 func main() {
 	// addHooks()
+	database.CreateDatabaseConnection()
+	database.CreateDatabase()
 	handleSIGINT()
-
 	cmd.Execute()
 }
 
