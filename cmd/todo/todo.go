@@ -5,6 +5,7 @@ import (
 	"go-cli-p/logger"
 	"go-cli-p/models"
 	"go-cli-p/services/todo"
+	"strconv"
 	"strings"
 
 	"github.com/spf13/cobra"
@@ -75,14 +76,14 @@ var TodoCmd = &cobra.Command{
 
 		if viewFlag != "" {
 			todoId := viewFlag
-			theTodo, _ := store.GetByID(todoId).(*todo.Todo)
-			if theTodo == nil {
+			todo := todo.GetTaskDetails(todoId)
+			if todo == nil {
 				logger.Println("Todo does not exists")
 				return
 			}
-			logger.Println(theTodo.GetDetails())
+			logger.Println("title : " + todo.Title)
+			logger.Println("Completed: " + strconv.FormatBool(todo.Completed))
 		}
-
 		// logger.Println(store.ViewAll())
 	},
 }
