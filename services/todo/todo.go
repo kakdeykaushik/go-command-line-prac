@@ -2,6 +2,7 @@ package todo
 
 import (
 	"fmt"
+	"go-cli-p/database"
 	"go-cli-p/models"
 
 	"github.com/google/uuid"
@@ -26,7 +27,8 @@ func NewTodo(title string, storage models.Storage) *Todo {
 
 // todo: return types to be added
 func (t *Todo) Save() {
-	t.storage.Save(t.Id, t)
+	database.AddTask(t.Id, t.Title, t.Complete)
+	//t.storage.Save(t.Id, t)
 }
 
 func (t *Todo) MarkComplete() {
@@ -60,4 +62,9 @@ func getStatus(complete bool) string {
 		status = "Complete"
 	}
 	return status
+}
+
+func GetTaskDetails(taskId string) *models.TodoModel {
+	result := database.GetTask(taskId)
+	return &result
 }

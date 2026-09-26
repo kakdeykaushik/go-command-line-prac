@@ -6,3 +6,9 @@ type Todo interface {
 	MarkComplete()
 	Delete()
 }
+
+type TodoModel struct {
+	Id        string
+	Title     string
+	Completed bool
+}
